@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hazem Hanaie Hussien Ibrahim</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --blue: #1a3a6b;
+    --accent: #2563c8;
+    --light-blue: #e8f0fb;
+    --border: #d0daea;
+    --text: #1a1a2e;
+    --muted: #5a6a82;
+    --white: #ffffff;
+    --bg: #f7f9fc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.65; }
+
+  header { background: var(--white); border-bottom: 1px solid var(--border); padding: 52px 0 38px; text-align: center; }
+  .header-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .name { font-family: 'Crimson Pro', serif; font-size: clamp(2rem,5vw,3.4rem); font-weight: 600; letter-spacing: -0.02em; color: var(--navy); margin-bottom: 8px; }
+  .subtitle { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .contact-line { font-size: 13px; color: var(--muted); display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+  .contact-line a { color: var(--accent); text-decoration: none; }
+
+  .stats-bar { background: var(--navy); padding: 22px 0; }
+  .stats-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-value { font-family: 'Crimson Pro', serif; font-size: 2.1rem; font-weight: 600; color: #7eb3f5; display: block; line-height: 1; }
+  .stat-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: 5px; display: block; }
+
+  nav { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; overflow-x: auto; scrollbar-width: none; }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .tab-btn { font-family: 'DM Sans', sans-serif; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: none; border: none; border-bottom: 2px solid transparent; padding: 17px 18px; cursor: pointer; white-space: nowrap; transition: all 0.18s; }
+  .tab-btn:hover { color: var(--blue); }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 500; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 52px 24px 90px; }
+  .tab-panel { display: none; animation: fadein 0.2s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadein { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+
+  .section-title { font-family: 'Crimson Pro', serif; font-size: 1.7rem; font-weight: 300; color: var(--navy); margin-bottom: 5px; }
+  .section-rule { width: 36px; height: 1px; background: var(--accent); margin-bottom: 34px; }
+
+  .exp-block { background: var(--white); border: 1px solid var(--border); margin-bottom: 28px; overflow: hidden; }
+  .exp-header { display: flex; align-items: center; gap: 24px; padding: 22px 28px; background: var(--white); border-bottom: 1px solid var(--border); }
+  .exp-logos { display: flex; align-items: center; gap: 12px; flex-shrink: 0; background: white; }
+  .exp-logos img { height: 60px; width: auto; max-width: 140px; object-fit: contain; display: block; }
+  .exp-title-group { flex: 1; min-width: 0; }
+  .exp-org { font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+  .exp-role { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .exp-period { font-size: 12px; color: var(--muted); text-align: right; flex-shrink: 0; white-space: nowrap; }
+  .exp-body { padding: 22px 28px; }
+  .exp-body ul { list-style: none; }
+  .exp-body li { padding: 5px 0 5px 14px; position: relative; font-size: 13.5px; line-height: 1.65; color: #2a2a3e; border-left: 2px solid var(--light-blue); margin-bottom: 9px; }
+  .exp-body li::before { content:''; position:absolute; left:-4px; top:13px; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+  .ht { display:inline-block; background:var(--light-blue); color:var(--blue); font-size:10px; padding:1px 6px; font-weight:500; letter-spacing:0.06em; margin-right:5px; }
+
+  .gallery-toggle { display:flex; align-items:center; padding:13px 28px; border-top:1px solid var(--border); cursor:pointer; font-size:11.5px; color:var(--blue); letter-spacing:0.1em; text-transform:uppercase; font-weight:500; background:var(--bg); transition:background 0.15s; user-select:none; }
+  .gallery-toggle:hover { background: var(--light-blue); }
+  .gallery-arrow { margin-left:auto; font-size:9px; transition:transform 0.2s; }
+  .gallery-toggle.open .gallery-arrow { transform:rotate(180deg); }
+  .gallery-grid { display:none; grid-template-columns:repeat(auto-fill,minmax(175px,1fr)); gap:5px; padding:14px 28px 18px; background:var(--bg); }
+  .gallery-grid.open { display:grid; }
+  .gallery-grid img { width:100%; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity 0.15s; border:1px solid var(--border); display:block; }
+  .gallery-grid img:hover { opacity:0.83; }
+  .gallery-grid video { width:100%; aspect-ratio:16/9; border:1px solid var(--border); display:block; }
+
+  #lightbox { display:none; position:fixed; inset:0; background:rgba(5,10,22,0.94); z-index:9999; align-items:center; justify-content:center; flex-direction:column; }
+  #lightbox.open { display:flex; }
+  #lightbox img { max-width:90vw; max-height:80vh; object-fit:contain; }
+  .lb-close { position:absolute; top:22px; right:30px; color:rgba(255,255,255,0.7); font-size:30px; cursor:pointer; }
+  .lb-close:hover { color:white; }
+  .lb-nav { display:flex; gap:18px; margin-top:18px; }
+  .lb-nav button { background:rgba(255,255,255,0.12); color:white; border:1px solid rgba(255,255,255,0.2); padding:8px 22px; cursor:pointer; font-size:12px; letter-spacing:0.1em; font-family:'DM Sans',sans-serif; }
+  .lb-nav button:hover { background:rgba(255,255,255,0.25); }
+  .lb-counter { color:rgba(255,255,255,0.4); font-size:12px; margin-top:10px; letter-spacing:0.1em; }
+
+  .skills-group { margin-bottom: 24px; }
+  .skills-label { font-size:10.5px; text-transform:uppercase; letter-spacing:0.18em; color:var(--muted); margin-bottom:10px; font-weight:500; }
+  .skills-tags { display:flex; flex-wrap:wrap; gap:7px; }
+  .skill-tag { background:var(--white); border:1px solid var(--border); font-size:12.5px; padding:5px 12px; color:var(--text); font-weight:300; }
+
+  .pub-block { background:var(--white); border:1px solid var(--border); padding:26px 28px; margin-bottom:22px; }
+  .pub-title { font-family:'Crimson Pro',serif; font-size:1.08rem; font-weight:600; color:var(--navy); margin-bottom:7px; line-height:1.45; }
+  .pub-meta { font-size:12px; color:var(--muted); margin-bottom:12px; }
+  .pub-status { display:inline-block; background:#fef9e7; color:#856404; font-size:10.5px; padding:2px 8px; font-weight:500; border:1px solid #f0d060; }
+
+  .award-block { background:var(--white); border:1px solid var(--border); border-left:3px solid var(--accent); padding:26px 28px; margin-bottom:22px; }
+  .award-name { font-family:'Crimson Pro',serif; font-size:1.15rem; font-weight:600; color:var(--navy); margin-bottom:5px; }
+  .award-by { font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); margin-bottom:12px; font-weight:500; }
+  .award-desc { font-size:13.5px; color:#3a3a5e; line-height:1.65; }
+
+  .about-intro { font-family:'Crimson Pro',serif; font-size:1.18rem; color:#2a2a3e; line-height:1.78; margin-bottom:28px; font-style:italic; padding-left:18px; border-left:2px solid var(--accent); }
+  .about-body { font-size:14px; line-height:1.78; color:#3a3a5e; }
+
+  @media(max-width:620px) {
+    .exp-header { flex-wrap:wrap; }
+    .exp-period { text-align:left; width:100%; }
+    .stats-inner { gap:32px; }
+    .gallery-grid { grid-template-columns:repeat(2,1fr); padding:12px 16px; }
+    .exp-body { padding:18px 16px; }
+    .exp-header { padding:18px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="name">Hazem Hanaie Hussien Ibrahim</div>
+    <div class="subtitle">Mechanical Engineer &nbsp;&middot;&nbsp; Computational Engineering &nbsp;&middot;&nbsp; Cairo, Egypt</div>
+    <div class="contact-line">
+      <span><a href="mailto:hazem.hanaie@gmail.com">hazem.hanaie@gmail.com</a></span>
+      <span>(+20) 1120600525</span>
+      <span>Cairo, Egypt</span>
+    </div>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <span class="stat-value">8<sup style="font-size:1.1rem;vertical-align:super;">th</sup></span>
+      <span class="stat-label">Class Rank</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">3.26</span>
+      <span class="stat-label">CGPA</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" style="font-size:1.5rem;letter-spacing:0.04em;">ASRT</span>
+      <span class="stat-label">Awarded Project</span>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <button class="tab-btn active" onclick="showTab('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="showTab('education',this)">Education</button>
+    <button class="tab-btn" onclick="showTab('experience',this)">Work Experience</button>
+    <button class="tab-btn" onclick="showTab('research',this)">Research &amp; Publications</button>
+    <button class="tab-btn" onclick="showTab('projects',this)">Projects</button>
+    <button class="tab-btn" onclick="showTab('honours',this)">Honours &amp; Awards</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- OVERVIEW -->
+<div id="tab-overview" class="tab-panel active">
+  <div class="section-title">Profile</div>
+  <div class="section-rule"></div>
+  <div class="about-intro">"I don't just run simulations &mdash; I build the computational frameworks that determine whether a result is merely better, or genuinely optimal."</div>
+  <div class="about-body">
+    <p style="margin-bottom:16px;">I am a mechanical engineer specializing in <strong>computational fluid dynamics, conjugate heat transfer, and design optimization</strong>, with a career built on one conviction: the greatest performance gains come not from more simulations, but from smarter methodological frameworks. From wind turbine aerodynamics to automotive thermal management and GPU cold plate optimization, my work consistently bridges rigorous physical modelling with automated, data-driven computational pipelines.</p>
+    <p style="margin-bottom:16px;">Graduating ranked <strong>8th in my class</strong> with a CGPA of <strong>3.26</strong> from Ain Shams University, I was part of ASU Wind whose graduation project was awarded a competitive grant by Egypt's <strong>Academy of Scientific Research &amp; Technology (ASRT)</strong> &mdash; recognition of its creative and impactful contribution to applied engineering.</p>
+    <p style="margin-bottom:36px;">Today I work across three parallel roles: CFD Application Engineer at Optumatics, Teaching Assistant at Ain Shams University, and Research Collaborator on GPU thermal management with a co-authored paper targeting submission in June 2026. My long-term focus is the intersection of <strong>high-fidelity multiphysics simulation and machine learning</strong> for next-generation energy systems.</p>
+    <div class="skills-group">
+      <div class="skills-label">Computational Modelling &amp; Simulation</div>
+      <div class="skills-tags">
+        <span class="skill-tag">CFD</span><span class="skill-tag">FEA</span><span class="skill-tag">Conjugate Heat Transfer</span><span class="skill-tag">ANSYS Fluent</span><span class="skill-tag">COMSOL Multiphysics</span><span class="skill-tag">OpenFOAM</span><span class="skill-tag">SpaceClaim</span><span class="skill-tag">ANSA</span><span class="skill-tag">Ennova</span><span class="skill-tag">ParaView</span><span class="skill-tag">Turbulence Modelling</span><span class="skill-tag">VARTM Process</span>
+      </div>
+    </div>
+    <div class="skills-group">
+      <div class="skills-label">Design Optimization &amp; Data Science</div>
+      <div class="skills-tags">
+        <span class="skill-tag">Surrogate Modelling</span><span class="skill-tag">Gaussian Process Regression</span><span class="skill-tag">Sensitivity Analysis (Sobol)</span><span class="skill-tag">Design of Experiments</span><span class="skill-tag">Parametric Optimization</span><span class="skill-tag">Reduced Order Modelling</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Python</span>
+      </div>
+    </div>
+    <div class="skills-group">
+      <div class="skills-label">CAD &amp; Prototyping</div>
+      <div class="skills-tags">
+        <span class="skill-tag">SolidWorks</span><span class="skill-tag">Fusion 360</span><span class="skill-tag">Inventor</span><span class="skill-tag">Solid Edge</span><span class="skill-tag">3D Printing</span><span class="skill-tag">CNC Milling</span><span class="skill-tag">Laser Cutting</span>
+      </div>
+    </div>
+    <div class="skills-group">
+      <div class="skills-label">Other</div>
+      <div class="skills-tags">
+        <span class="skill-tag">Simulink</span><span class="skill-tag">Arduino</span><span class="skill-tag">Linux</span><span class="skill-tag">BEM Theory</span><span class="skill-tag">Xfoil</span><span class="skill-tag">Genetic Algorithm Optimization</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<div id="tab-education" class="tab-panel">
+  <div class="section-title">Education</div>
+  <div class="section-rule"></div>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <div class="exp-logos"><img src="assets/logos/asu.jpg" alt="Ain Shams University"></div>
+      <div class="exp-title-group">
+        <div class="exp-org">Ain Shams University — Faculty of Engineering</div>
+        <div class="exp-role">B.Sc. in Mechanical Engineering &nbsp;&middot;&nbsp; Cairo, Egypt</div>
+      </div>
+      <div class="exp-period">Sep 2018 – Jun 2023</div>
+    </div>
+    <div class="exp-body">
+      <ul>
+        <li><span class="ht">CGPA 3.26</span> Graduated ranked <strong>8th in class</strong> across the Mechanical Engineering cohort at Ain Shams University.</li>
+        <li><span class="ht">Core Curriculum</span> Mathematics, thermodynamics, fluid mechanics, heat transfer, combustion, control theory, thermal power plants, internal combustion engines, CFD, and wind energy systems.</li>
+        <li><span class="ht">Computational Skills</span> CAD modelling (SolidWorks, Fusion 360, Inventor), CFD simulation (COMSOL Multiphysics, ANSYS Fluent, OpenFOAM), programming (Python, MATLAB), and model-based design (Simulink).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <div class="exp-logos"><img src="assets/logos/grad.jpg" alt="ASU Wind"></div>
+      <div class="exp-title-group">
+        <div class="exp-org">ASU Wind — ISWTC, Hanze University (Netherlands)</div>
+        <div class="exp-role">Aerodynamicist &nbsp;&middot;&nbsp; Graduation Project</div>
+      </div>
+      <div class="exp-period">Sep 2022 – Jul 2023</div>
+    </div>
+    <div class="exp-body">
+      <ul>
+        <li><span class="ht">Aerodynamic Design</span> Designed wind turbine blades using a MATLAB-based BEM optimization program with genetic algorithm airfoil selection and Xfoil for 2D aerodynamic coefficient evaluation.</li>
+        <li><span class="ht">CFD Validation</span> Conducted 3D K-&omega; turbulence model simulations in ANSYS Fluent to evaluate aerodynamic performance and validate the turbulence closure against physical benchmarks.</li>
+        <li><span class="ht">FEA Structural</span> Performed finite element analysis in ANSYS Mechanical for stress distribution and tip deflection under rated aerodynamic loading, verifying structural integrity against yield failure criteria.</li>
+        <li><span class="ht">Mechanical Systems</span> Contributed to yaw system design and developed a novel braking system concept with adjustable air gap, high dynamic response, and minimized weight.</li>
+        <li><span class="ht">Manufacturing</span> Fabricated the turbine blade via VARTM and machined components on a 4-axis CNC milling machine.</li>
+        <li><span class="ht">ASRT Awarded</span> Project received a competitive research fund from Egypt's Academy of Scientific Research &amp; Technology (ASRT) for its creative engineering contribution.</li>
+      </ul>
+    </div>
+    <div class="gallery-toggle" onclick="toggleGallery(this)">Gallery &mdash; Photos &amp; Videos <span class="gallery-arrow">&#9660;</span></div>
+    <div class="gallery-grid" data-folder="grad" data-imgs='["assets/grad/1.jpg","assets/grad/2.jpg","assets/grad/3.jpg","assets/grad/4.jpg","assets/grad/5.jpg","assets/grad/6.jpg","assets/grad/7.jpg","assets/grad/8.jpg","assets/grad/9.jpg","assets/grad/10.jpg","assets/grad/11.jpg"]' data-video="assets/grad/v1.mp4"></div>
+  </div>
+</div>
+
+<!-- WORK EXPERIENCE -->
+<div id="tab-experience" class="tab-panel">
+  <div class="section-title">Work Experience</div>
+  <div class="section-rule"></div>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <div class="exp-logos">
+        <img src="assets/logos/opt.jpg" alt="Optumatics">
+        <img src="assets/logos/rmc.png" alt="Rafaat Miller Consulting">
+        <img src="assets/logos/stell.jpg" alt="Stellantis">
+      </div>
+      <div class="exp-title-group">
+        <div class="exp-org">Optumatics</div>
+        <div class="exp-role">CFD Application Engineer &nbsp;&middot;&nbsp; Cairo, Egypt</div>
+      </div>
+      <div class="exp-period">May 2025 – Present</div>
+    </div>
+    <div class="exp-body">
+      <ul>
+        <li><span class="ht">Automotive Thermal Analysis</span> Delivering conjugate heat transfer simulations — underhood and underbody thermal analysis — for automotive OEM clients including Stellantis, in collaboration with Rafaat Miller Consulting.</li>
+        <li><span class="ht">Full Pipeline</span> Managing the end-to-end computational modelling workflow: geometry clean-up in SpaceClaim and ANSA, domain discretisation, and specification of boundary conditions for coupled fluid dynamics and heat transfer solvers, including powertrain subsystem thermal representations.</li>
+        <li><span class="ht">Post-Processing</span> Quantitative and visual post-processing in ParaView, leveraging data science tools for performance benchmarking and optimization insights.</li>
+        <li><span class="ht">Meshing Research</span> Led a systematic benchmarking study of HVAC meshing methodologies using ANSA and Ennova, achieving a <strong>30% reduction in mesh size</strong> without sacrificing simulation fidelity.</li>
+      </ul>
+    </div>
+    <div class="gallery-toggle" onclick="toggleGallery(this)">Gallery &mdash; Photos &amp; Videos <span class="gallery-arrow">&#9660;</span></div>
+    <div class="gallery-grid" data-imgs='["assets/opt/1.jpg","assets/opt/2.jpg","assets/opt/3.jpg","assets/opt/4.jpg","assets/opt/5.jpg"]'></div>
+  </div>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <div class="exp-logos"><img src="assets/logos/asu.jpg" alt="Ain Shams University"></div>
+      <div class="exp-title-group">
+        <div class="exp-org">Ain Shams University</div>
+        <div class="exp-role">Teaching Assistant &nbsp;&middot;&nbsp; Cairo, Egypt</div>
+      </div>
+      <div class="exp-period">Jul 2025 – Present</div>
+    </div>
+    <div class="exp-body">
+      <ul>
+        <li><span class="ht">Teaching</span> Instructing undergraduate courses in heat transfer, combustion, and control theory, developing and updating laboratory experiments to deepen conceptual understanding.</li>
+        <li><span class="ht">Computational Pedagogy</span> Introducing students to scientific computing for thermodynamic modelling, linear systems solving, and numerical methods.</li>
+        <li><span class="ht">Combustion Research</span> Conducted experimental investigations in laminar flame kinetics and contributed to the design of a swirl-stabilized burner for departmental combustion research.</li>
+      </ul>
+    </div>
+    <div class="gallery-toggle" onclick="toggleGallery(this)">Gallery &mdash; Photos &amp; Videos <span class="gallery-arrow">&#9660;</span></div>
+    <div class="gallery-grid" data-imgs='["assets/asu/1.jpg"]' data-video="assets/asu/v1.mp4"></div>
+  </div>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <div class="exp-logos"><img src="assets/logos/ga.png" alt="Groupe Atlantic ECET"></div>
+      <div class="exp-title-group">
+        <div class="exp-org">Groupe Atlantic — ECET</div>
+        <div class="exp-role">Technology Development Intern &nbsp;&middot;&nbsp; Cairo, Egypt</div>
+      </div>
+      <div class="exp-period">Jul 2022 – Dec 2023</div>
+    </div>
+    <div class="exp-body">
+      <ul>
+        <li><span class="ht">CFD Simulation</span> Conducted verified and validated simulations of turbulent fluid flow and conjugate heat transfer in domestic water heaters using COMSOL Multiphysics, with emphasis on thermal stratification modelling.</li>
+        <li><span class="ht">Parametric Study</span> Systematic parametric studies across multiple subsystem geometry concepts in direct collaboration with Groupe Atlantic's international partner Cotherm's CFD engineering team.</li>
+        <li><span class="ht">Optimization Framework</span> Developed a full computational pipeline integrating Gaussian Process surrogate modelling, Sobol sensitivity analysis, and multi-parameter design optimization, resulting in a concept that improved thermal performance by <strong>9%</strong>, independently verified by physical laboratory testing.</li>
+        <li><span class="ht">Automation Pipeline</span> Engineered an end-to-end MATLAB tool interfaced with COMSOL via LiveLink: design space definition, DoE, automated simulation execution, regression model construction, and report generation with real-time workflow monitoring.</li>
+        <li><span class="ht">Mentoring</span> Trained and mentored a new student team on a parallel product development project.</li>
+      </ul>
+    </div>
+    <div class="gallery-toggle" onclick="toggleGallery(this)">Gallery &mdash; Photos &amp; Videos <span class="gallery-arrow">&#9660;</span></div>
+    <div class="gallery-grid" data-imgs='["assets/ga/1.jpg","assets/ga/2.jpg","assets/ga/3.jpg","assets/ga/4.jpg","assets/ga/5.jpg","assets/ga/6.jpg","assets/ga/7.jpg","assets/ga/8.jpg","assets/ga/9.jpg","assets/ga/10.jpg"]' data-video="assets/ga/v1.mp4"></div>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<div id="tab-research" class="tab-panel">
+  <div class="section-title">Research &amp; Publications</div>
+  <div class="section-rule"></div>
+  <div class="pub-block">
+    <div class="pub-title">Numerical Investigation of Inlet and Outlet Fin Truncation and Cavity Augmentation in a Liquid-Cooled GPU Cold Plate</div>
+    <div class="pub-meta">Supervisor: Ibrahim Osama Elhagali (EPFL) &nbsp;&middot;&nbsp; <span class="pub-status">In Preparation &mdash; Target Submission: June 2026</span></div>
+    <p style="font-size:13.5px;color:#3a3a5e;line-height:1.68;">CFD-driven investigation of fin geometry modification strategies for liquid-cooled GPU cold plate thermal management. Using OpenFOAM to model fluid flow and conjugate heat transfer within microchannel configurations, the study performs parametric design optimization to identify geometry configurations that maximize thermal performance while minimizing pressure drop. Post-processing in ParaView with comparative benchmarking against baseline designs.</p>
+    <div class="gallery-toggle" style="margin-top:18px;" onclick="toggleGallery(this)">Gallery &mdash; Research Visuals <span class="gallery-arrow">&#9660;</span></div>
+    <div class="gallery-grid" data-imgs='["assets/gpu/1.jpg","assets/gpu/2.jpg","assets/gpu/3.jpg","assets/gpu/4.jpg"]'></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div id="tab-projects" class="tab-panel">
+  <div class="section-title">Projects</div>
+  <div class="section-rule"></div>
+  <div class="exp-block">
+    <div class="exp-header">
+      <div class="exp-logos"><img src="assets/logos/dao.jpg" alt="DA&O Tool" style="height:52px;max-width:220px;"></div>
+      <div class="exp-title-group">
+        <div class="exp-org">DA&amp;O Tool — Design Analysis &amp; Optimization Suite</div>
+        <div class="exp-role">Developer &nbsp;&middot;&nbsp; MATLAB-Based Computational Framework</div>
+      </div>
+      <div class="exp-period">Feb 2026 – Present</div>
+    </div>
+    <div class="exp-body">
+      <p style="font-size:13.5px;line-height:1.68;color:#2a2a3e;margin-bottom:16px;">A modular MATLAB computational suite for streamlining parametric engineering workflows, transforming raw simulation data into optimized designs through a seamless, extensible pipeline architecture. Born from the lesson of over 100 manual iterations at Groupe Atlantic, DA&amp;O codifies the methodological shift from simulation-based to computation-driven design.</p>
+      <ul>
+        <li><span class="ht">DoE Module</span> Latin hypercube sampling, full factorial, and Sobol sequences for efficient exploration of high-dimensional design spaces.</li>
+        <li><span class="ht">Sensitivity Analysis</span> Sobol global sensitivity indices to identify dominant design variables and reduce optimization dimensionality.</li>
+        <li><span class="ht">Surrogate Modelling</span> Gaussian Process Regression and polynomial response surfaces for fast, validated approximation of computationally expensive simulation responses.</li>
+        <li><span class="ht">Optimization</span> Multi-parameter gradient-based and evolutionary optimization for design space exploitation.</li>
+        <li><span class="ht">Post-Processing</span> Automated data analysis, visualization, and report generation with real-time workflow progress monitoring.</li>
+      </ul>
+    </div>
+    <div class="gallery-toggle" onclick="toggleGallery(this)">Gallery &mdash; Tool Screenshots <span class="gallery-arrow">&#9660;</span></div>
+    <div class="gallery-grid" data-imgs='["assets/dao/1.jpg","assets/dao/2.jpg","assets/dao/3.jpg","assets/dao/4.jpg","assets/dao/5.jpg","assets/dao/6.jpg"]'></div>
+  </div>
+</div>
+
+<!-- HONOURS -->
+<div id="tab-honours" class="tab-panel">
+  <div class="section-title">Honours &amp; Awards</div>
+  <div class="section-rule"></div>
+  <div class="award-block">
+    <div class="award-name">Graduation Project Research &amp; Innovation Fund</div>
+    <div class="award-by">Academy of Scientific Research &amp; Technology (ASRT), Egypt &nbsp;&middot;&nbsp; September 2023</div>
+    <div class="award-desc">Recipient of a competitive research and innovation fund awarded by Egypt's Academy of Scientific Research &amp; Technology (ASRT), recognizing the ASU Wind graduation project as a creative and high-impact contribution to applied engineering and energy sciences. The awarded project encompassed a complete wind turbine design, multiphysics simulation, and manufacturing workflow, validating the integrity of the full engineering chain from BEM-based aerodynamic optimization and K-&omega; turbulence modelling through structural FEA to physical wind tunnel performance testing.</div>
+  </div>
+</div>
+
+</main>
+
+<div id="lightbox" onclick="closeLightboxBg(event)">
+  <span class="lb-close" onclick="closeLightbox()">&times;</span>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-nav">
+    <button onclick="lbNav(-1);event.stopPropagation()">&#8592; Prev</button>
+    <button onclick="lbNav(1);event.stopPropagation()">Next &#8594;</button>
+  </div>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleGallery(el) {
+  el.classList.toggle('open');
+  var grid = el.nextElementSibling;
+  grid.classList.toggle('open');
+  if (grid.classList.contains('open') && grid.children.length === 0) {
+    var imgs = JSON.parse(grid.dataset.imgs || '[]');
+    var video = grid.dataset.video || '';
+    imgs.forEach(function(src, i) {
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Gallery image ' + (i + 1);
+      img.loading = 'lazy';
+      img.onclick = function() { openLightbox(imgs, i); };
+      grid.appendChild(img);
+    });
+    if (video) {
+      var vid = document.createElement('video');
+      vid.src = video;
+      vid.controls = true;
+      vid.style.cssText = 'width:100%;aspect-ratio:16/9;border:1px solid var(--border);display:block;';
+      grid.appendChild(vid);
+    }
+  }
+}
+
+var lbImgs = [], lbIdx = 0;
+function openLightbox(imgs, idx) {
+  lbImgs = imgs; lbIdx = idx;
+  document.getElementById('lb-img').src = imgs[idx];
+  document.getElementById('lb-counter').textContent = (idx+1) + ' / ' + imgs.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeLightboxBg(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+function lbNav(dir) {
+  lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length;
+  document.getElementById('lb-img').src = lbImgs[lbIdx];
+  document.getElementById('lb-counter').textContent = (lbIdx+1) + ' / ' + lbImgs.length;
+}
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+</body>
+</html>
